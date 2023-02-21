@@ -76,3 +76,24 @@ FROM (
     WHERE semester = 'Autumn' OR semester = 'Fall' AND year = 2022 
     GROUP BY course_id, sec_id
 ) as StudentCounts;
+
+
+
+
+
+-- 6) Find the enrolment of each section that was offered in Autumn 2022 (group by sec_id)
+
+SELECT sec_id, COUNT(ID) AS Enrolment
+FROM Takes 
+WHERE semester = 'Autumn' OR semester = 'Fall' AND year = 2022 
+GROUP BY sec_id;
+
+-- 7) Find the maximum enrolment, across all sections, in Autumn 2022 (group by sec_id)
+
+SELECT MAX(Enrolment) 
+FROM (
+    SELECT COUNT(ID) AS Enrolment 
+    FROM Takes 
+    WHERE semester = 'Autumn' OR semester = 'Fall' AND year = 2022 
+    GROUP BY sec_id
+) as StudentCounts;
